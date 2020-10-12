@@ -13,7 +13,7 @@ pipeline {
 
     stages {
         stage('Check Environment') {
-            agent ('right'){
+            agent { label 'right'}
                 steps {
                     script {
                      
@@ -56,7 +56,7 @@ pipeline {
                     sh "curl icanhazip.com"
                     sh "ansible-playbook ansible/check_playbook.yml -i l -b --become-user root $TAGSX"             
                 }
-            }
+            
         }
 
          stage('Unit Testing') {
