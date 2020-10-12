@@ -55,7 +55,7 @@ pipeline {
                  
                 }
                 
-                sh "ansible-playbook ansible/check_playbook.yml -i l $TAGSX"             
+                sh "ansible-playbook ansible/check_playbook.yml -i l -b --become-user root $TAGSX"             
             }
         }
 
