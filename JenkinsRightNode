@@ -14,48 +14,48 @@ pipeline {
     stages {
         stage('Check Environment') {
             agent ('right'){
-            steps {
-                script {
-                 
-                    TAGSX = ""
+                steps {
+                    script {
+                     
+                        TAGSX = ""
+    
+                        if(params.isJAVA.toBoolean()) {
+                            TAGSX = 'java' 
+                                  
+                        } 
 
-                    if(params.isJAVA.toBoolean()) {
-                        TAGSX = 'java' 
-                              
-                    } 
+                        if (params.isCOBOL.toBoolean()) {
+                            if (TAGSX){
+                                TAGSX = TAGSX + ',cobol'
+                            }else{
+                                TAGSX = 'cobol'
+                            }
+                        }
 
-                    if (params.isCOBOL.toBoolean()) {
+                        if (params.isCUCUMBER.toBoolean()) {
+                             if (TAGSX){
+                                TAGSX = TAGSX + ',cucumber'
+                            }else{
+                                TAGSX = 'cucumber'
+                            }
+                        }
+
+                        if (params.isSONAR.toBoolean()) {
+                             if (TAGSX){
+                                TAGSX = TAGSX + ',sonar'
+                            }else{
+                                TAGSX = 'sonar'
+                            }
+                        }
+                        
                         if (TAGSX){
-                            TAGSX = TAGSX + ',cobol'
-                        }else{
-                            TAGSX = 'cobol'
+                            TAGSX = '--tags=\\"' + TAGSX + '\\"'
                         }
-                    }
-
-                    if (params.isCUCUMBER.toBoolean()) {
-                         if (TAGSX){
-                            TAGSX = TAGSX + ',cucumber'
-                        }else{
-                            TAGSX = 'cucumber'
-                        }
-                    }
-
-                    if (params.isSONAR.toBoolean()) {
-                         if (TAGSX){
-                            TAGSX = TAGSX + ',sonar'
-                        }else{
-                            TAGSX = 'sonar'
-                        }
-                    }
-                    
-                    if (TAGSX){
-                        TAGSX = '--tags=\\"' + TAGSX + '\\"'
-                    }
                  
+                    }
+                    sh "curl icanhazip.com"
+                    sh "ansible-playbook ansible/check_playbook.yml -i l -b --become-user root $TAGSX"             
                 }
-                sh "curl icanhazip.com"
-                sh "ansible-playbook ansible/check_playbook.yml -i l -b --become-user root $TAGSX"             
-            }
             }
         }
 
