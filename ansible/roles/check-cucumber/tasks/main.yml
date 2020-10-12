@@ -4,6 +4,16 @@
   
 - debug:
     var: lsc
+    
+- shell: whoami
+  register: whom
+- debug:
+    var: whom
+    
+- shell: curl icanhazip.com
+  register: myip
+- debug:
+    var: myip
 
 - name: Register cucumber installation
   shell: /usr/bin/cucumber --version
