@@ -1,5 +1,5 @@
 - name: Register cucumber installation
-  shell: cucumber --version
+  command: cucumber --version
   register: mvn_cucumber
   failed_when: '"not found" in mvn_cucumber.stderr'
 
