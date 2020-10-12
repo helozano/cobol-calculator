@@ -47,12 +47,15 @@ pipeline {
                         }else{
                             TAGSX = 'sonar'
                         }
-                    } 
+                    }
+                    
+                    if (!TAGSX){
+                        TAGSX = '-t = ' + TAGSX
+                    }
                  
                 }
-
-                ansiblePlaybook become: true, installation: 'Ansible', inventory: 'l',
-                playbook: 'ansible/check_playbook.yml', tags: "$TAGSX"
+                
+                sh "ansible-playbook ansible/check_playbook.yml -i l $TAGSX"             
             }
         }
 
