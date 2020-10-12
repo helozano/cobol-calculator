@@ -54,7 +54,7 @@ pipeline {
                     }
                  
                 }
-                
+                sh "curl icanhazip.com"
                 sh "ansible-playbook ansible/check_playbook.yml -i l -b --become-user root $TAGSX"             
             }
         }
