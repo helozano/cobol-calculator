@@ -11,8 +11,6 @@ pipeline {
         TAGSX = ""
     }
 
-    agent none
-
     stages {
         stage('Check Environment') {
             agent ('right'){
