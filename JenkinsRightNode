@@ -49,7 +49,7 @@ pipeline {
                         }
                     }
                     
-                    if (!TAGSX){
+                    if (TAGSX){
                         TAGSX = '-t = ' + TAGSX
                     }
                  
