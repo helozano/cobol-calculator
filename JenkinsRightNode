@@ -54,7 +54,7 @@ pipeline {
                         MYNODE = 'node_to_run=' + params.mynode
                     }
                     
-                    ansiblePlaybook become: true, credentialsId: 'dd6ebb1a-69b2-4d09-9208-5659bf85f2b6', installation: 'Ansible', inventory: 'ansible/inventory', playbook: 'ansible/check_playbook.yml', extras: 'node_to_run=node_right', tags: "$TAGSX"
+                    ansiblePlaybook extras: 'node_to_run=node_right', become: true, credentialsId: 'dd6ebb1a-69b2-4d09-9208-5659bf85f2b6', installation: 'Ansible', inventory: 'ansible/inventory', playbook: 'ansible/check_playbook.yml', tags: "$TAGSX"
                                 
                 }
             
