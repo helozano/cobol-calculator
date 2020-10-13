@@ -5,7 +5,6 @@ pipeline {
         booleanParam(name: 'isCOBOL', defaultValue: true, description: 'Execute Cobol')
         booleanParam(name: 'isCUCUMBER', defaultValue: true, description: 'Execute Cucumber')
         booleanParam(name: 'isSONAR', defaultValue: true, description: 'Execute Sonar')
-        string(name: 'mynode', defaultValue: 'right_node', description: 'Execute Sonar')
     }
     
     environment {
@@ -54,14 +53,14 @@ pipeline {
                         MYNODE = 'node_to_run=' + params.mynode
                     }
                     sh "curl icanhazip.com"
-                    ansiblePlaybook become: true, credentialsId: 'dd6ebb1a-69b2-4d09-9208-5659bf85f2b6', installation: 'Ansible', inventory: 'ansible/inventory', playbook: 'ansible/check_playbook.yml', tags: "$TAGSX", extras: 'shdkjsdhskj'
+                    ansiblePlaybook become: true, installation: 'Ansible', inventory: 'l',playbook: 'ansible/check_playbook.yml', tags: "$TAGSX"
                                 
                 }
             
         }
 
          stage('Unit Testing') {
-             agent { label 'master'}
+             agent { label 'fail'}
              steps {
                  echo 'Compile unit testing framework'
                  echo 'Unit test'
@@ -71,7 +70,7 @@ pipeline {
              }
          }
          stage('SonarCloud Analysis') {     
-             agent { label 'master' }
+             agent { label 'fail' }
              environment {
                  scannerHome = tool 'SonarCubeScanner'
              }            
@@ -82,7 +81,7 @@ pipeline {
              }
          }
         stage('Functional Testing Cucumber') {
-            agent { label 'master' }
+            agent { label 'fail' }
             steps {
                 sh 'cd src/main/cobol; cobc -free -x -o calculator2-exe CALCULATOR2.CBL; ls -al; cp calculator2-exe /tmp; ls /tmp;'
                 checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/diana-estrada/hellocucumber.git']]]
