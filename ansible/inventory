@@ -1,0 +1,5 @@
+[right_node]
+3.91.77.243 ansible_user=ubuntu
+
+[invalid_node]
+54.174.142.218 ansible_user=ubuntu
