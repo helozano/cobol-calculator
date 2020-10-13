@@ -15,7 +15,7 @@ pipeline {
    agent none
     stages {
         stage('Check Environment') {
-            agent { label $params.node}
+            agent { label params.node}
                 steps {
                     script {
                      
