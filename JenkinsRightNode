@@ -5,7 +5,7 @@ pipeline {
         booleanParam(name: 'isCOBOL', defaultValue: true, description: 'Execute Cobol')
         booleanParam(name: 'isCUCUMBER', defaultValue: true, description: 'Execute Cucumber')
         booleanParam(name: 'isSONAR', defaultValue: true, description: 'Execute Sonar')
-        string(defaultValue: 'right', description: 'select node', name: 'node')
+        string(defaultValue: 'right', description: 'select node', name: 'mynode')
 
     }
     
@@ -55,8 +55,9 @@ pipeline {
                         }
                  
                     }
+                    MYNODE = '--extra-vars=\\"' + params.mynode + '\\"'
                     sh "curl icanhazip.com"
-                    sh "ansible-playbook ansible/check_playbook.yml -i l -b --become-user root $TAGSX"             
+                    sh "ansible-playbook ansible/check_playbook.yml -i l -b --become-user root --extra-vars $MYNODE $TAGSX"             
                 }
             
         }
