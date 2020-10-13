@@ -59,6 +59,7 @@ pipeline {
                     }
                     
                     sh "curl icanhazip.com"
+                    ansiblePlaybook become: true, credentialsId: 'fbab17f7-a9dc-468d-9a47-35934c1728d9', installation: 'Ansible', inventory: 'ansible/inventory', playbook: 'ansible/check_playbook.yml'
                     sh "ansible-playbook ansible/check_playbook.yml -i ansible/inventory -b --become-user root $MYNODE $TAGSX"             
                 }
             
