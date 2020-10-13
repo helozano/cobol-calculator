@@ -54,7 +54,7 @@ pipeline {
                         if (TAGSX){
                             TAGSX = '--tags=\\"' + TAGSX + '\\"'
                         }
-                        MYNODE = '--extra-vars=\\"node_to_run=' + params.mynode + '\\"'
+                        MYNODE = '--extra-vars \\"node_to_run=' + params.mynode + '\\"'
                     }
                     
                     sh "curl icanhazip.com"
