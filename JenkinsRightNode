@@ -12,7 +12,7 @@ pipeline {
     environment {
         TAGSX = ""
         MYNODE = ""
-        ANSIBLE_HOST_KEY_CHECKING=False
+        ANSIBLE_HOST_KEY_CHECKING="False"
     }
    agent none
     stages {
