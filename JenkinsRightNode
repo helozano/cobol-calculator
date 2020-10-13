@@ -52,13 +52,13 @@ pipeline {
                         }
                         
                         if (TAGSX){
-                            TAGSX = '--tags=\\"' + TAGSX + '\\"'
+                            TAGSX = '--tags \\"' + TAGSX + '\\"'
                         }
                         MYNODE = '--extra-vars \\"node_to_run=' + params.mynode + '\\"'
                     }
                     
                     sh "curl icanhazip.com"
-                    sh "ansible-playbook ansible/check_playbook.yml -i l -b --become-user root $MYNODE $TAGSX"             
+                    sh "ansible-playbook ansible/check_playbook.yml -i inventory -b --become-user root $MYNODE $TAGSX"             
                 }
             
         }
