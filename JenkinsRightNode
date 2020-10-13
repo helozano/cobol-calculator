@@ -5,15 +5,17 @@ pipeline {
         booleanParam(name: 'isCOBOL', defaultValue: true, description: 'Execute Cobol')
         booleanParam(name: 'isCUCUMBER', defaultValue: true, description: 'Execute Cucumber')
         booleanParam(name: 'isSONAR', defaultValue: true, description: 'Execute Sonar')
-    }
+        string(defaultValue: 'right', description: 'select node', name: 'node')
 
+    }
+    
     environment {
         TAGSX = ""
     }
    agent none
     stages {
         stage('Check Environment') {
-            agent { label 'right'}
+            agent { label $params.node}
                 steps {
                     script {
                      
