@@ -58,7 +58,7 @@ pipeline {
                     }
                     
                     sh "curl icanhazip.com"
-                    sh "ansible-playbook ansible/check_playbook.yml -i inventory -b --become-user root $MYNODE $TAGSX"             
+                    sh "ansible-playbook ansible/check_playbook.yml -i ansible/inventory -b --become-user root $MYNODE $TAGSX"             
                 }
             
         }
