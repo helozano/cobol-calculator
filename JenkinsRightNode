@@ -5,6 +5,7 @@ pipeline {
         booleanParam(name: 'isCOBOL', defaultValue: true, description: 'Execute Cobol')
         booleanParam(name: 'isCUCUMBER', defaultValue: true, description: 'Execute Cucumber')
         booleanParam(name: 'isSONAR', defaultValue: true, description: 'Execute Sonar')
+        string(name: 'mynode', defaultValue: 'right_node', description: 'Execute Sonar')
     }
     
     environment {
