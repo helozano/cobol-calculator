@@ -49,10 +49,7 @@ pipeline {
                                 TAGSX = 'sonar'
                             }
                         }
-                        
-                        if (TAGSX){
-                            TAGSX = '\\"' + TAGSX + '\\"'
-                        }
+   
                         MYNODE = '--extra-vars \\"node_to_run=' + params.mynode + '\\"'
                     }
                     
