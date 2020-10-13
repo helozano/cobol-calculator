@@ -1,5 +1,5 @@
 ---
-- hosts: "right"
+- hosts: "right_node"
   roles: 
     - role: check-cobol
       tags: [cobol]
