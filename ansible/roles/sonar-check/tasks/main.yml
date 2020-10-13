@@ -1,13 +1,3 @@
-- name: Revisa que la url de sonar este funcionando
-  uri:
-    url: "https://sonarcloud.io/dashboard?id=helozano_cobol-calculator"
-    follow_redirects: none
-    method: GET
-  register: _result
-  until: _result.status == 200
-  retries: 720
-  delay: 5
-  
 - name: Verify project link of SonarCloud
   uri:
     url: 'https://sonarcloud.io/dashboard?id=helozano_cobol-calculator'
@@ -16,8 +6,9 @@
       Accept: 'application/json'
     validate_certs: yes
     follow_redirects: all
-    return_content: yes
+    return_content: no
     status_code: 200
     method: GET
   register: get_nodes_out
   failed_when: "'FAILED' in get_nodes_out"
+- debug: var=get_nodes_out
