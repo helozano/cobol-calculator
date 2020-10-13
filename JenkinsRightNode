@@ -5,8 +5,6 @@ pipeline {
         booleanParam(name: 'isCOBOL', defaultValue: true, description: 'Execute Cobol')
         booleanParam(name: 'isCUCUMBER', defaultValue: true, description: 'Execute Cucumber')
         booleanParam(name: 'isSONAR', defaultValue: true, description: 'Execute Sonar')
-        string(defaultValue: 'right', description: 'select node', name: 'mynode')
-
     }
     
     environment {
@@ -53,14 +51,13 @@ pipeline {
                         }
                         
                         if (TAGSX){
-                            TAGSX = '--tags \\"' + TAGSX + '\\"'
+                            TAGSX = '\\"' + TAGSX + '\\"'
                         }
                         MYNODE = '--extra-vars \\"node_to_run=' + params.mynode + '\\"'
                     }
                     
-                    sh "curl icanhazip.com"
-                    ansiblePlaybook become: true, credentialsId: 'dd6ebb1a-69b2-4d09-9208-5659bf85f2b6', installation: 'Ansible', inventory: 'ansible/inventory', playbook: 'ansible/check_playbook.yml'
-                    sh "ansible-playbook ansible/check_playbook.yml -i ansible/inventory -b --become-user root $MYNODE $TAGSX"             
+                    ansiblePlaybook become: true, credentialsId: 'dd6ebb1a-69b2-4d09-9208-5659bf85f2b6', installation: 'Ansible', inventory: 'ansible/inventory', playbook: 'ansible/check_playbook.yml', tags: $TAGSX
+                                
                 }
             
         }
