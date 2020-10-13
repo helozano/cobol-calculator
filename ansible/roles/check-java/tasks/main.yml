@@ -12,3 +12,25 @@
 
 - debug:
       msg: "{{ java_result.stdout }}"
+
+- name: "Check if GIT is installed"
+  package_facts:
+    manager: "auto"                                                                                                                                                                   
+- name: "GIT test result"                                                                                                                                                     
+  debug:                                                                                                                                                                        
+    msg: "Git found"                                                                                                                                                          
+  when: "'git' in ansible_facts.packages"                                                                                                                                                                                                                                                                                                               
+- name: "Git test result"                                                                                                                                                     
+  debug:                                                                                                                                                                        
+    msg: "Git NOT found"                                                                                                                                                      
+  when: "'git' not in ansible_facts.packages"
+
+- stat:                                                                                                                                                                         
+    path: /opt/apache-maven-3.6.3                                                                                                                                             
+  register: result                                                                                                                                                          
+- debug:                                                                                                                                                                        
+    msg: "Maven is here"                                                                                                                                                      
+  when: result.stat.exists                                                                                                                                                  
+- debug:
+    msg: "Maven is not installed"
+  when: result.stat.exists==false
