@@ -1,5 +1,5 @@
 ---
-- hosts: "{{ node_to_run }}"
+- hosts: localhost
   vars:
     - node_to_run: "right_node"
   roles: 
