@@ -1,5 +1,7 @@
 ---
-- hosts: "right_node"
+- hosts: "{{ node_to_run }}"
+  vars:
+    - node_to_run: "right"
   roles: 
     - role: check-cobol
       tags: [cobol]
