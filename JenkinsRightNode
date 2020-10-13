@@ -16,7 +16,7 @@ pipeline {
    agent none
     stages {
         stage('Check Environment') {
-            agent { label params.node}
+            agent { label 'master'}
                 steps {
                     script {
                      
@@ -64,7 +64,7 @@ pipeline {
         }
 
          stage('Unit Testing') {
-             agent { label 'right' }
+             agent { label 'master'}
              steps {
                  echo 'Compile unit testing framework'
                  echo 'Unit test'
@@ -74,7 +74,7 @@ pipeline {
              }
          }
          stage('SonarCloud Analysis') {     
-             agent { label 'right' }
+             agent { label 'master' }
              environment {
                  scannerHome = tool 'SonarCubeScanner'
              }            
@@ -85,7 +85,7 @@ pipeline {
              }
          }
         stage('Functional Testing Cucumber') {
-            agent { label 'right' }
+            agent { label 'master' }
             steps {
                 sh 'cd src/main/cobol; cobc -free -x -o calculator2-exe CALCULATOR2.CBL; ls -al; cp calculator2-exe /tmp; ls /tmp;'
                 checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/diana-estrada/hellocucumber.git']]]
