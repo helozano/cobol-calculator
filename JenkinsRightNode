@@ -16,7 +16,7 @@ pipeline {
    agent none
     stages {
         stage('Check Environment') {
-            agent { label 'master'}
+            agent { label 'right'}
                 steps {
                     script {
                      
@@ -53,8 +53,8 @@ pipeline {
    
                         MYNODE = 'node_to_run=' + params.mynode
                     }
-                    
-                    ansiblePlaybook become: true, credentialsId: 'dd6ebb1a-69b2-4d09-9208-5659bf85f2b6', installation: 'Ansible', inventory: 'ansible/inventory', playbook: 'ansible/check_playbook.yml', tags: "$TAGSX" , extras: 'shdkjsdhskj'
+                    sh "url icanhazip.com"
+                    ansiblePlaybook become: true, credentialsId: 'dd6ebb1a-69b2-4d09-9208-5659bf85f2b6', installation: 'Ansible', inventory: 'ansible/inventory', playbook: 'ansible/check_playbook.yml', tags: "$TAGSX", extras: 'shdkjsdhskj'
                                 
                 }
             
